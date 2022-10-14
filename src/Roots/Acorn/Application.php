@@ -28,7 +28,7 @@ class Application extends FoundationApplication
      *
      * @var string
      */
-    public const VERSION = '3.x-dev';
+    public const VERSION = '2.1.2';
 
     /**
      * The custom bootstrap path defined by the developer.
@@ -267,8 +267,8 @@ class Application extends FoundationApplication
                 })
                 ->unique()
                 ->filter(function ($path) use ($files) {
-                    return @$files->isFile("{$path}/vendor/composer/installed.json")
-                        && @$files->isFile("{$path}/composer.json");
+                    return $files->isFile("{$path}/vendor/composer/installed.json")
+                        && $files->isFile("{$path}/composer.json");
                 })
                 ->all();
 
@@ -396,8 +396,7 @@ class Application extends FoundationApplication
 
         report($e);
 
-        return is_object($provider) ? $provider : new class ($this) extends ServiceProvider {
-        };
+        return is_object($provider) ? $provider : new class ($this) extends ServiceProvider {}; // phpcs:ignore
     }
 
     /**

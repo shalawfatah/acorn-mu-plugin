@@ -4,7 +4,7 @@
  * Plugin Name:   Acorn
  * Plugin URI:    https://roots.io/acorn
  * Description:   Lazy-loaded framework for WordPress themes and plugins
- * Version:       3.x-dev
+ * Version:       2.1.2
  * Author:        Roots
  * Author URI:    https://roots.io
  * License:       MIT
@@ -13,4 +13,4 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-Roots\add_actions(['plugins_loaded', 'rest_api_init'], \Roots\bootloader(), 5);
+Roots\add_actions(['after_setup_theme', 'rest_api_init'], 'Roots\bootloader', 5);

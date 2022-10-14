@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -32,13 +32,22 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => WP_CONTENT_DIR,
+            'url' => content_url(),
+            'visibility' => 'public',
         ],
 
-        'public' => [
+        'wordpress' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => ABSPATH,
+            'url' => site_url(),
+            'visibility' => 'public',
+        ],
+
+        'theme' => [
+            'driver' => 'local',
+            'root' => get_theme_file_path(),
+            'url' => get_theme_file_uri(),
             'visibility' => 'public',
         ],
 
@@ -61,13 +70,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may configure the symbolic links that will be created when the
-    | `storage:link` Acorn command is executed. The array keys should be
+    | `storage:link` wp-cli command is executed. The array keys should be
     | the locations of the links and the values should be their targets.
     |
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        // public_path('storage') => storage_path('app/public'),
     ],
 
 ];
